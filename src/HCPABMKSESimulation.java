@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
-// 主类，包含HCP-ABMKSE方案的所有算法和性能测试
+
 public class HCPABMKSESimulation {
     private Pairing pairing;
     private Field G1, G2, GT, Zp;
@@ -18,7 +18,7 @@ public class HCPABMKSESimulation {
     private MessageDigest hash;
     private Map<String, Element> Y_map; // 存储 Y_{i,t_i} = g1^{y_{i,t_i}}
 
-    // 初始化JPBC库和系统参数
+    // 初始化系统参数
     public HCPABMKSESimulation() throws NoSuchAlgorithmException {
         // 加载Type A曲线参数
         PairingParameters params = PairingFactory.getPairingParameters("a.properties");
@@ -75,7 +75,7 @@ public class HCPABMKSESimulation {
             // 为每个属性生成 K_i' 和 K_i''
             for (String x : attributes) {
                 Element lambda_i = Zp.newRandomElement().getImmutable();
-                Element y_i_ti = hashStringToZp(x); // 假设 y_{i,t_i} 通过哈希生成
+                Element y_i_ti = hashStringToZp(x); 
                 // K_i' = g2^(beta + y_{i,t_i} * lambda_i)
                 K_prime.add(g2.powZn(beta.add(y_i_ti.mul(lambda_i))).getImmutable());
                 // K_i'' = g2^(lambda_i)
